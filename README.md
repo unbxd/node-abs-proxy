@@ -21,7 +21,8 @@ http.createServer(function(req, res) {
 
 Note that default value for `port` is 80 and can be skipped from being included in the parameter hash for `Proxy`.
 
-##### Override GET request
+##### Override an existing path
+###### GET
 ```javascript
 proxy.onGet('/', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -34,7 +35,7 @@ http.createServer(function(req, res) {
 }).listen(8080, 'localhost');
 ```
 
-##### Override POST request
+###### POST
 ```javascript
 proxy.onPost('/post', function(req, res) {
     res.writeHead(201, {'Content-Type': 'text/plain'});
