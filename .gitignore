@@ -1,0 +1,5 @@
+# Emacs backup files
+*~
+
+# npm installed dependencies
+node_modules/
