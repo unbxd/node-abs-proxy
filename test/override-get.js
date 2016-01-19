@@ -4,12 +4,13 @@ var http = require('http');
 var $ = require('cheerio');
 var absProxy = require('../index');
 var server;
+var proxy;
 
 describe('With http://httpbin.org, override', function() {
     describe('GET /', function() {
         var TEST_MESSAGE = "test message";
         before(function() {
-            var proxy = absProxy
+            proxy = absProxy
                 .createAbsProxy({host: 'httpbin.org', port: 80});
             proxy.onGet('/', function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -23,6 +24,7 @@ describe('With http://httpbin.org, override', function() {
 
         after(function() {
             server.close();
+            proxy.listeners.get = [];
         });
 
         it('should return 200', function(done) {
