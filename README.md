@@ -1,6 +1,8 @@
 # abs-proxy
 HTTP proxying with ability to override existing routes or define new routes.
 
+[![Build Status](https://travis-ci.org/unbxd/node-abs-proxy.svg?branch=master)](https://travis-ci.org/unbxd/node-abs-proxy)
+
 ### Usage
 ##### Require & instantiate
 ```javascript
