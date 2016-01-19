@@ -50,8 +50,7 @@ describe('With http://httpbin.org, override', function() {
             };
 
             request.get(options, function(err, res, body) {
-                expect($('body', body).text())
-                    .to.equal(TEST_MESSAGE);
+                expect(body).to.equal(TEST_MESSAGE);
                 done();
             });
         })
