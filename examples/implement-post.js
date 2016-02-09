@@ -3,7 +3,7 @@ var proxy = absProxy.createAbsProxy({host: 'httpbin.org', port: 80})
 
 proxy.onPost('/non-existent-path', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('Hello, you did a GET at ' + req.url + '!\n');
+    res.end('Hello, you did a POST at ' + req.url + '!\n');
 });
 
 var http = require('http');
