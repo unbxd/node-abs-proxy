@@ -6,10 +6,10 @@ var server;
 var proxy;
 
 describe('With http://httpbin.org, override', function() {
-    describe('GET /', function() {
+    describe('POST /post', function() {
         var TEST_MESSAGE = 'test message';
         var options = {
-            url: 'http://localhost:8080',
+            url: 'http://localhost:8080/post',
             headers: {
                 'Content-Type': 'text/plain'
             }
@@ -17,8 +17,8 @@ describe('With http://httpbin.org, override', function() {
         before(function() {
             proxy = absProxy
                 .createAbsProxy({host: 'httpbin.org', port: 80});
-            proxy.onGet('/', function(req, res) {
-                res.writeHead(200, {'Content-Type': 'text/plain'});
+            proxy.onPost('/post', function(req, res) {
+                res.writeHead(201, {'Content-Type': 'text/plain'});
                 res.end(TEST_MESSAGE);
             });
 
@@ -29,14 +29,14 @@ describe('With http://httpbin.org, override', function() {
 
         after(function() {
             server.close();
-            proxy.listeners.get = [];
+            proxy.listeners.post = [];
         });
 
-        it('should return 200', function(done) {
+        it('should return 201', function(done) {
             this.timeout(5000);
 
-            request.get(options, function(err, res) {
-                expect(res.statusCode).to.equal(200);
+            request.post(options, function(err, res) {
+                expect(res.statusCode).to.equal(201);
                 done();
             });
         });
@@ -44,7 +44,7 @@ describe('With http://httpbin.org, override', function() {
         it('should contain the body from override', function(done) {
             this.timeout(5000);
 
-            request.get(options, function(err, res, body) {
+            request.post(options, function(err, res, body) {
                 expect(body).to.equal(TEST_MESSAGE);
                 done();
             });

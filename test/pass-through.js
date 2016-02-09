@@ -7,6 +7,12 @@ var server;
 
 describe('With http://httpbin.org', function() {
     describe('GET /', function() {
+	var options = {
+            url: 'http://localhost:8080',
+            headers: {
+                'Content-Type': 'text/plain'
+            }
+        };
         before(function() {
             var proxy = absProxy
                 .createAbsProxy({host: 'httpbin.org', port: 80});
@@ -21,14 +27,8 @@ describe('With http://httpbin.org', function() {
 
         it('should return 200', function(done) {
             this.timeout(5000);
-            var options = {
-                url: 'http://localhost:8080',
-                headers: {
-                    'Content-Type': 'text/plain'
-                }
-            };
 
-            request.get(options, function(err, res, body) {
+            request.get(options, function(err, res) {
                 expect(res.statusCode).to.equal(200);
                 done();
             });
@@ -36,18 +36,12 @@ describe('With http://httpbin.org', function() {
 
         it('should contain proper title', function(done) {
             this.timeout(5000);
-            var options = {
-                url: 'http://localhost:8080',
-                headers: {
-                    'Content-Type': 'text/plain'
-                }
-            };
 
             request.get(options, function(err, res, body) {
                 expect($('title', body).text())
                     .to.equal("httpbin(1): HTTP Client Testing Service");
                 done();
-            });            
-        })
+            });
+        });
     });
 });
