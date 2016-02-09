@@ -7,7 +7,7 @@ var proxy;
 
 describe('With http://httpbin.org, override', function() {
     describe('GET /', function() {
-        var TEST_MESSAGE = "test message";
+        var TEST_MESSAGE = 'test message';
         var options = {
             url: 'http://localhost:8080',
             headers: {
@@ -35,7 +35,7 @@ describe('With http://httpbin.org, override', function() {
         it('should return 200', function(done) {
             this.timeout(5000);
 
-            request.get(options, function(err, res, body) {
+            request.get(options, function(err, res) {
                 expect(res.statusCode).to.equal(200);
                 done();
             });

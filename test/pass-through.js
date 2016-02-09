@@ -28,7 +28,7 @@ describe('With http://httpbin.org', function() {
         it('should return 200', function(done) {
             this.timeout(5000);
 
-            request.get(options, function(err, res, body) {
+            request.get(options, function(err, res) {
                 expect(res.statusCode).to.equal(200);
                 done();
             });
