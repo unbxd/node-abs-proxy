@@ -19,15 +19,14 @@ describe('With http://httpbin.org, apply after filter', function() {
             proxy = absProxy
                 .createAbsProxy({host: 'httpbin.org', port: 80});
 
-	    proxy.afterFilter(/\//, function(req, res, chain) {
-		TEST_MESSAGE = AFTER_FILTER_MESSAGE;
-		chain.next(req, res);
-	    });
-
             proxy.onGet('/', function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
-                res.end(TEST_MESSAGE);
             });
+
+	    proxy.afterFilter(/\//, function(req, res, chain) {
+		res.end(AFTER_FILTER_MESSAGE);
+		chain.next(req, res);
+	    });
 
             server = http.createServer(function(req, res) {
                 proxy.dispatch(req, res);
@@ -37,6 +36,7 @@ describe('With http://httpbin.org, apply after filter', function() {
         after(function() {
             server.close();
             proxy.listeners.get = [];
+	    proxy.filters.after = [];
         });
 
         it('should return 200', function(done) {

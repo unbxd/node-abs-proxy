@@ -19,14 +19,14 @@ describe('With http://httpbin.org, apply before filter', function() {
             proxy = absProxy
                 .createAbsProxy({host: 'httpbin.org', port: 80});
 
-	    proxy.beforeFilter(/\//, function(req, res, chain){
-		TEST_MESSAGE = BEFORE_FILTER_MESSAGE;
+	    proxy.beforeFilter(/\//, function(req, res, chain) {
+		req.body = BEFORE_FILTER_MESSAGE;
 		chain.next(req, res);
 	    });
 
             proxy.onGet('/', function(req, res) {
                 res.writeHead(200, {'Content-Type': 'text/plain'});
-                res.end(TEST_MESSAGE);
+                res.end(req.body);
             });
 
             server = http.createServer(function(req, res) {
@@ -37,6 +37,7 @@ describe('With http://httpbin.org, apply before filter', function() {
         after(function() {
             server.close();
             proxy.listeners.get = [];
+	    proxy.filters.before = [];
         });
 
         it('should return 200', function(done) {
