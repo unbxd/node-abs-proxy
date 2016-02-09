@@ -7,7 +7,6 @@ var proxy;
 
 describe('With http://httpbin.org, apply before filter', function() {
     describe('GET /', function() {
-	var TEST_MESSAGE = 'test message';
 	var BEFORE_FILTER_MESSAGE = 'before filter message';
 	var options = {
             url: 'http://localhost:8080',
