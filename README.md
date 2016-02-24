@@ -76,3 +76,20 @@ http.createServer(function(req, res) {
     proxy.dispatch(req, res);
 }).listen(8080, 'localhost');
 ```
+
+##### Modify Proxy Response
+```javascript
+var proxy = absProxy.createAbsProxy({
+  host: 'httpbin.org',
+  port: 80,
+  onResponse: function(data) {
+    return 'ok';
+  }
+});
+
+var http = require('http');
+
+http.createServer(function(req, res) {
+  proxy.dispatch(req, res);
+}).listen(8080, 'localhost');
+```
