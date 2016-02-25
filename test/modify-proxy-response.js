@@ -31,6 +31,7 @@ describe('With http://httpbin.org, modify response from proxy', function() {
 
 	after(function() {
 	    server.close();
+	    proxy.listeners.proxy = [];
 	});
 
 	it('should return 200', function(done) {
@@ -48,6 +49,17 @@ describe('With http://httpbin.org, modify response from proxy', function() {
 	    request.get(options, function(err, res, body) {
 		body = JSON.parse(body);
 		expect(body.args.q).to.equal('modified');
+		done();
+	    });
+	});
+
+	it('should be able to parse gzipped response', function(done) {
+	    this.timeout(5000);
+	    options.url = 'http://localhost:8080/gzip';
+
+	    request.get(options, function(err, res, body) {
+		body = JSON.parse(body);
+		expect(body.gzipped).to.equal(true);
 		done();
 	    });
 	});
