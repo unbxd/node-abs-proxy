@@ -25,7 +25,8 @@
     "after",
     "angular",
     "inject",
-    "module"
+    "module",
+    "Buffer"
   ],
   "quotmark": true,
   "trailing": true,
