@@ -12,6 +12,10 @@
   "noarg": true,
   "noempty": true,
   "nonew": true,
+  "globals": {
+    "$": true,
+    "expect": true
+  },
   "predef": [
     "$",
     "jQuery",

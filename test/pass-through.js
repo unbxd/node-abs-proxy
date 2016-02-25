@@ -39,7 +39,7 @@ describe('With http://httpbin.org', function() {
 
             request.get(options, function(err, res, body) {
                 expect($('title', body).text())
-                    .to.equal("httpbin(1): HTTP Client Testing Service");
+                    .to.equal('httpbin(1): HTTP Client Testing Service');
                 done();
             });
         });
