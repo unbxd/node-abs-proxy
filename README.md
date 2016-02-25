@@ -81,10 +81,11 @@ http.createServer(function(req, res) {
 ```javascript
 var proxy = absProxy.createAbsProxy({
   host: 'httpbin.org',
-  port: 80,
-  onResponse: function(data) {
-    return 'ok';
-  }
+  port: 80
+});
+
+proxy.onResponse(/\//, function(data) {
+  return 'ok';
 });
 
 var http = require('http');
