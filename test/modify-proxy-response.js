@@ -17,11 +17,12 @@ describe('With http://httpbin.org, modify response from proxy', function() {
 	    proxy = absProxy
 		.createAbsProxy({
 		    host: 'httpbin.org',
-		    port: 80,
-		    onResponse: function(data) {
-			return data.toString().replace('unmodified', 'modified');
-		    }
+		    port: 80
 		});
+
+	    proxy.onResponse(/\//, function(data) {
+		return data.toString().replace('unmodified', 'modified');
+	    });
 
 	    server = http.createServer(function(req, res) {
 		proxy.dispatch(req, res);
