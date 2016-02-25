@@ -2,7 +2,7 @@ var absProxy = require('../index');
 var proxy = absProxy.createAbsProxy({
     host: 'httpbin.org',
     port: 80,
-    onResponse: function(data) {
+    onResponse: function() {
 	return 'ok';
     }
 });
