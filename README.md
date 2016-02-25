@@ -84,7 +84,7 @@ var proxy = absProxy.createAbsProxy({
   port: 80
 });
 
-proxy.onResponse(/\//, function(data) {
+proxy.onResponse(/\//, function(data, req, res) {
   return 'ok';
 });
 
