@@ -3,3 +3,4 @@
 
 # npm installed dependencies
 node_modules/
+coverage/
