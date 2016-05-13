@@ -12,6 +12,10 @@
   "noarg": true,
   "noempty": true,
   "nonew": true,
+  "globals": {
+    "$": true,
+    "expect": true
+  },
   "predef": [
     "$",
     "jQuery",
@@ -25,7 +29,8 @@
     "after",
     "angular",
     "inject",
-    "module"
+    "module",
+    "Buffer"
   ],
   "quotmark": true,
   "trailing": true,
