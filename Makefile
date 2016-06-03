@@ -12,4 +12,11 @@ test-w:
         --ui tdd \
         --watch
 
-.PHONY: test test-w
+coverage:
+	@NODE_ENV=test ./node_modules/.bin/istanbul \
+	cover ./node_modules/.bin/_mocha \
+	-- \
+        --reporter $(REPORTER) \
+        --ui tdd
+
+.PHONY: test test-w coverage
